@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: . # Current directory
+    ports:
+      - "8000:8000"
+
+    # Allows us to get the updates we make to our project into
+    # our docker image in real time. This is done by mapping a volume
+    # from our local machine to our docker container that runs our app.
+    # Updating the volume will then automatically update the container.
+    volumes:
+      - ./app:/app
+
+    # Run the command that is used to start our app in our container.
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+
+
